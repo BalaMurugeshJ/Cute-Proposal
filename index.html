@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Special Message 💖</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            margin-top: 100px;
+        }
+        h1 {
+            color: #ff3399;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #noBtn {
+            background-color: #ff4d4d;
+            color: white;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Do You Love Me? 💕</h1>
+
+<button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+<button id="noBtn" onmouseover="moveButton()">No 😜</button>
+
+<script>
+    function yesClicked() {
+        document.body.innerHTML = "<h1>Happy Valentine's Day My Love 💘🌹</h1>";
+    }
+
+    function moveButton() {
+        var button = document.getElementById("noBtn");
+        var x = Math.random() * window.innerWidth;
+        var y = Math.random() * window.innerHeight;
+        button.style.left = x + "px";
+        button.style.top = y + "px";
+    }
+</script>
+
+</body>
+</html>
