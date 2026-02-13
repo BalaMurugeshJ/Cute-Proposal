@@ -1,55 +1,144 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Special Message 💖</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #ffe6f2;
-            margin-top: 100px;
-        }
-        h1 {
-            color: #ff3399;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            margin: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        #yesBtn {
-            background-color: #4CAF50;
-            color: white;
-        }
-        #noBtn {
-            background-color: #ff4d4d;
-            color: white;
-            position: absolute;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>You've Got Mail 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Gmail Fake Screen */
+#gmailScreen {
+    height: 100vh;
+    background: #f1f3f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mailBox {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Proposal Screen */
+#proposalScreen {
+    display: none;
+    height: 100vh;
+    background: linear-gradient(to right, #ff99cc, #ff66b2);
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 100px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#yesBtn {
+    background: #4CAF50;
+    color: white;
+}
+
+#noBtn {
+    background: #ff3333;
+    color: white;
+    position: absolute;
+}
+
+/* Falling Hearts */
+.heart {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); }
+}
+</style>
 </head>
+
 <body>
 
-<h1>Do You Love Me? 💕</h1>
+<!-- Gmail Fake UI -->
+<div id="gmailScreen">
+    <div class="mailBox" onclick="openMail()">
+        <h3>From: Bala Murugesh 💙</h3>
+        <p>To: Shanmugapriya 💖</p>
+        <p><b>Subject:</b> A Special Message Just For You 💌</p>
+        <p>Click to open...</p>
+    </div>
+</div>
 
-<button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
-<button id="noBtn" onmouseover="moveButton()">No 😜</button>
+<!-- Proposal Screen -->
+<div id="proposalScreen">
+    <h1>Shanmugapriya 💕<br>Do You Love Me?</h1>
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn" onmouseover="moveButton()">No 😜</button>
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/wav">
+</audio>
 
 <script>
-    function yesClicked() {
-        document.body.innerHTML = "<h1>Happy Valentine's Day My Love 💘🌹</h1>";
-    }
+function openMail() {
+    document.getElementById("gmailScreen").style.display = "none";
+    document.getElementById("proposalScreen").style.display = "block";
+    document.getElementById("bgMusic").play();
+    createHearts();
+}
 
-    function moveButton() {
-        var button = document.getElementById("noBtn");
-        var x = Math.random() * window.innerWidth;
-        var y = Math.random() * window.innerHeight;
-        button.style.left = x + "px";
-        button.style.top = y + "px";
-    }
+function yesClicked() {
+    document.getElementById("proposalScreen").innerHTML =
+        "<h1 style='margin-top:150px;'>I Love You Too Shanmugapriya 💘🌹<br>- Bala Murugesh 💙</h1>";
+}
+
+function moveButton() {
+    var button = document.getElementById("noBtn");
+    var x = Math.random() * (window.innerWidth - 100);
+    var y = Math.random() * (window.innerHeight - 50);
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+}
+
+function createHearts() {
+    setInterval(function() {
+        var heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.getElementById("proposalScreen").appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+    }, 300);
+}
 </script>
 
 </body>
